@@ -24,21 +24,23 @@
   flex-wrap: wrap;
 }
 
+/* Matches github.com/smallcrustation/portfolio-react Project.css — SVG “crop” via negative margin. */
 .Project-bg {
-  /* background-color: lightgrey; */
   overflow: hidden;
-  transition: .5s linear all;
+  transition: 0.5s linear all;
   margin: 5em 0;
 }
 
 .Project-bg svg {
-  /* 'crop' svg  */
   transition: 2s linear background-color;
   margin: -2%;
 }
 
 .Project-imgs {
   margin: 20px 0;
+  position: relative;
+  width: 100%;
+  min-width: 0;
 }
 
 /* relative parent absolute child - gives you an element you can position inside parent*/
@@ -75,6 +77,7 @@
   }
   .Project-imgs {
     margin: 0 10%;
+    min-width: 0;
   }
   .Project img {
     top: 10%;
@@ -96,6 +99,7 @@
   }
   .Project-imgs {
     width: 50%;
+    min-width: 0;
     margin: 0;
   }
   .Project-summary {

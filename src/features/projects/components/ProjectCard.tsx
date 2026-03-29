@@ -4,6 +4,7 @@ import { useTheme } from "@/features/theme/context/ThemeContext";
 import WavesSvg from "@/assets/svgs/WavesSvg";
 import "@/features/projects/components/Project.css";
 
+/** Matches original portfolio-react Project.js scroll parallax constants. */
 const slowBgYTrans = 5;
 const slowBgRotate = 5;
 const slowImgYTrans = 2;
@@ -35,10 +36,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
     if (!el) {
       return;
     }
-    const bottomWindowYOffset = window.scrollY + window.innerHeight;
+    const bottomWindowYOffset = window.pageYOffset + window.innerHeight;
     if (
       bottomWindowYOffset > el.offsetTop &&
-      window.scrollY < el.offsetTop
+      window.pageYOffset < el.offsetTop
     ) {
       const pos =
         el.clientHeight + el.offsetTop - bottomWindowYOffset;
@@ -47,8 +48,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
   }, []);
 
   useEffect(() => {
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [handleScroll]);
 
   const openSite = useCallback((url: string) => {
@@ -60,7 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       className="Project"
       style={rowRev ? { flexDirection: "row-reverse" } : undefined}
     >
-      <div className="Project-imgs fadeInUp" ref={projectRef}>
+      <div ref={projectRef} className="Project-imgs fadeInUp">
         <div>
           <img
             onClick={() => openSite(liveUrl)}
@@ -86,9 +90,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div
           className="Project-bg circle-ish"
           style={{
-            transform: `rotate(${scrollPos / slowBgRotate}deg) translateY(${
-              scrollPos / slowBgYTrans
-            }%)`,
+            transform: `rotate(${scrollPos / slowBgRotate}deg) translateY(${scrollPos / slowBgYTrans}%)`,
           }}
         >
           <WavesSvg

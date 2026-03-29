@@ -10,8 +10,9 @@ describe("projects data", () => {
       seen.add(p.id);
       expect(() => new URL(p.liveUrl)).not.toThrow();
       expect(() => new URL(p.gitHub)).not.toThrow();
-      if (p.githubApi) {
-        expect(() => new URL(p.githubApi)).not.toThrow();
+      const { githubApi } = p;
+      if (githubApi !== undefined) {
+        expect(() => new URL(githubApi)).not.toThrow();
       }
     }
   });

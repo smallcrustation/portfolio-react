@@ -1,5 +1,10 @@
 /// <reference types="vite/client" />
 
+declare module "smoothscroll-polyfill" {
+  const smoothscroll: { polyfill: () => void };
+  export default smoothscroll;
+}
+
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE?: string;
   readonly VITE_APP_DESCRIPTION?: string;
